@@ -1,7 +1,7 @@
 <?php require "vendor/autoload.php"; ?>
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 
 <head>
   <meta charset="UTF-8">
@@ -50,8 +50,8 @@
       </div>
     </div>
 
-    <div class="row p-4 justify-content-center">
-      <div class="col">
+    <div class="row justify-content-center p-4">
+      <div class="col mx-auto">
         <div class="card border-dark mb-3" style="max-width: 23rem;">
           <div class="card-header">Élève</div>
           <div class="card-body">
@@ -64,7 +64,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col mx-auto">
         <div class="card border-dark mb-3" style="max-width: 23rem;">
           <div class="card-header">Professeur</div>
           <div class="card-body">
@@ -76,7 +76,7 @@
           </div>
         </div>
       </div>
-      <div class="col">
+      <div class="col mx-auto">
         <div class="card border-dark mb-3" style="max-width: 23rem;">
           <div class="card-header">Administrateur</div>
           <div class="card-body">

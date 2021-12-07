@@ -11,3 +11,8 @@ Refonte du projet web-vote, ancien projet web de DUT.
 * Page d'accueil
 * Bootstrap
 * Bootswatch
+
+## Commit 4
+
+* Modification de l'index
+* Classe Formulaire.php
