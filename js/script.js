@@ -1,6 +1,6 @@
 const navbarLink = document.querySelectorAll("nav a.nav-link");
 navbarLink.forEach(function(link) { link.classList.remove("active"); });
-document.querySelector(".visually-hidden").remove();
+document.querySelector(".visually-hidden")?.remove();
 
 const url = window.location.search;
 const queryStatut = new URLSearchParams(url);

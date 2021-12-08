@@ -5,11 +5,11 @@ switch ($_GET["statut"]) {
   case 'eleve':
     $statut = "Élève";
     break;
-  
+
   case 'prof':
     $statut = "Professeur";
     break;
-  
+
   case 'admin':
     $statut = "Administrateur";
     break;
@@ -36,7 +36,7 @@ $_POST["verif-statut"] = $_GET["statut"];
   <title>Connexion : <?= $statut ?></title>
 </head>
 
-<body>
+<body class="vh-100">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="/index.php">Web Vote</a>
@@ -47,9 +47,7 @@ $_POST["verif-statut"] = $_GET["statut"];
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a id="accueil" class="nav-link active" href="/index.php">Accueil
-              <span class="visually-hidden">(current)</span>
-            </a>
+            <a id="accueil" class="nav-link" href="/index.php">Accueil</a>
           </li>
           <li class="nav-item">
             <a id="eleve" class="nav-link" href="/php/pageConnexion.php?statut=eleve">Élève</a>
@@ -65,22 +63,25 @@ $_POST["verif-statut"] = $_GET["statut"];
     </div>
   </nav>
 
-  <div class="container m-4">
-    <div class="row justify-content-center">
+  <div class="container m-4 h-50">
+    <div class="row justify-content-center align-items-center mt-5 h-100">
       <div class="col-4">
         <form action="/php/actionConnexion.php?statut=<?= $_GET["statut"] ?>" method="POST">
           <fieldset>
             <legend>Connexion : <?= $statut ?></legend>
             <div class="form-group">
-              <div class="form-floating">
-                <input type="text" class="form-control" id="pseudo">
+              <div class="form-floating my-3">
+                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Un pseudo">
                 <label for="pseudo">Pseudo</label>
               </div>
-
               <div class="form-floating">
-                <input type="password" class="form-control" id="mdp">
+                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password">
                 <label for="mdp">Mot de passe</label>
               </div>
+            </div>
+
+            <div class="d-grid gap-2 col-6 mx-auto my-3">
+              <button class="btn btn-primary" type="submit">Connexion</button>
             </div>
           </fieldset>
         </form>
@@ -90,4 +91,5 @@ $_POST["verif-statut"] = $_GET["statut"];
 
   <script src="/js/script.js"></script>
 </body>
+
 </html>
