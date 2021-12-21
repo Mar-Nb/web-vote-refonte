@@ -18,12 +18,10 @@ switch ($_GET["statut"]) {
     header("Location: /index.php");
     break;
 }
-
-$_POST["verif-statut"] = $_GET["statut"];
 ?>
 
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" class="h-100">
 
 <head>
   <meta charset="UTF-8">
@@ -36,7 +34,7 @@ $_POST["verif-statut"] = $_GET["statut"];
   <title>Connexion : <?= $statut ?></title>
 </head>
 
-<body class="vh-100">
+<body class="d-flex flex-column h-100">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
       <a class="navbar-brand" href="/index.php">Web Vote</a>
@@ -63,19 +61,19 @@ $_POST["verif-statut"] = $_GET["statut"];
     </div>
   </nav>
 
-  <div class="container m-4 h-50">
+  <div class="d-flex align-items-center justify-content-center p-5">
     <div class="row justify-content-center align-items-center mt-5 h-100">
-      <div class="col-4">
+      <div class="col">
         <form action="/php/actionConnexion.php?statut=<?= $_GET["statut"] ?>" method="POST">
           <fieldset>
-            <legend>Connexion : <?= $statut ?></legend>
+            <legend>Connexion : <span class="fw-bold"><?= $statut ?></span></legend>
             <div class="form-group">
               <div class="form-floating my-3">
-                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Un pseudo">
+                <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Un pseudo" required>
                 <label for="pseudo">Pseudo</label>
               </div>
               <div class="form-floating">
-                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password">
+                <input type="password" class="form-control" id="mdp" name="mdp" placeholder="Password" required>
                 <label for="mdp">Mot de passe</label>
               </div>
             </div>

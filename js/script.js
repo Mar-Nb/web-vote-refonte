@@ -1,3 +1,4 @@
+// JS de la navbar
 const navbarLink = document.querySelectorAll("nav a.nav-link");
 navbarLink.forEach(function(link) { link.classList.remove("active"); });
 document.querySelector(".visually-hidden")?.remove();
@@ -22,3 +23,11 @@ if (statut != "") {
   accueil.classList.add("active");
   accueil.appendChild(createHiddenSpan());
 }
+
+// JS pour les inputs de connexion
+const allInput = document.querySelector("input.form-control");
+allInput.forEach(function(input) {
+  input.addEventListener('exit', function() {
+    alert("Sortie d'un input");
+  });
+});
