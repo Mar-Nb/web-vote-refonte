@@ -25,9 +25,20 @@ if (statut != "") {
 }
 
 // JS pour les inputs de connexion
-const allInput = document.querySelector("input.form-control");
+const allInput = document.querySelectorAll("input.form-control");
+
 allInput.forEach(function(input) {
-  input.addEventListener('exit', function() {
-    alert("Sortie d'un input");
+  input.addEventListener('focusout', function() {
+    let divErr = document.createElement("div");
+    divErr.classList.add("invalid-feedback");
+    divErr.textContent = "Vous devez remplir ce champ obligatoire.";
+    if (input.value == "") {
+      input.classList.add("is-invalid");
+      input.insertAdjacentElement("afterend", divErr);
+    } else if (input.value != "") {
+      input.classList.remove("is-invalid");
+      try { document.querySelectorAll(".invalid-feedback")?.remove(); }
+      catch (error) {}
+    }
   });
 });

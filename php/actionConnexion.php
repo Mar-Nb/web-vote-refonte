@@ -1,1 +1,0 @@
-<?php echo "Connexion en cours : " . $_POST["pseudo"] . ", statut = " . $_GET["statut"]; ?>

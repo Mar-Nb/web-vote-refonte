@@ -27,3 +27,13 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 6
 
 * Correction du Commit 5
+
+## Commit 7 
+
+* Modification intermédiaire
+
+## Commit 8
+
+* Modification dans l'arborescence
+* Mise en place de la query de connexion
+* JS pour la page de connexion

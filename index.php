@@ -30,13 +30,13 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/php/pageConnexion.php?statut=eleve">Élève</a>
+            <a class="nav-link" href="pageConnexion.php?statut=eleve">Élève</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/php/pageConnexion.php?statut=prof">Professeur</a>
+            <a class="nav-link" href="pageConnexion.php?statut=prof">Professeur</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="/php/pageConnexion.php?statut=admin">Administrateur</a>
+            <a class="nav-link" href="pageConnexion.php?statut=admin">Administrateur</a>
           </li>
         </ul>
       </div>
