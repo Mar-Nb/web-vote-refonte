@@ -25,18 +25,18 @@
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a class="nav-link active" href="/index.php">Accueil
+            <a id="accueil" class="nav-link active" href="/index.php">Accueil
               <span class="visually-hidden">(current)</span>
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pageConnexion.php?statut=eleve">Élève</a>
+            <a id="eleve" class="nav-link" href="pageConnexion.php?statut=eleve">Élève</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pageConnexion.php?statut=prof">Professeur</a>
+            <a id="prof" class="nav-link" href="pageConnexion.php?statut=prof">Professeur</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="pageConnexion.php?statut=admin">Administrateur</a>
+            <a id="admin" class="nav-link" href="pageConnexion.php?statut=admin">Administrateur</a>
           </li>
         </ul>
       </div>

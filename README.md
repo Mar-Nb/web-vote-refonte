@@ -37,3 +37,10 @@ Refonte du projet web-vote, ancien projet web de DUT.
 * Modification dans l'arborescence
 * Mise en place de la query de connexion
 * JS pour la page de connexion
+
+## Commit 9
+
+* Page de vote et action
+* JS de la page de vote
+* Assets
+* Corrections mineures
