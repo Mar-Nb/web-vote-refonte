@@ -44,3 +44,7 @@ Refonte du projet web-vote, ancien projet web de DUT.
 * JS de la page de vote
 * Assets
 * Corrections mineures
+
+## Commit 10
+
+* Factorisation du JS de la navbar

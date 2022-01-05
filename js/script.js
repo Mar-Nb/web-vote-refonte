@@ -14,15 +14,14 @@ function createHiddenSpan() {
   return span;
 }
 
-if (statut != null && statut != "") {
-  let elem = document.getElementById(statut); 
+function putActiveClass(id) {
+  let elem = document.getElementById(id);
   elem.classList.add("active");
   elem.appendChild(createHiddenSpan());
-} else {
-  let accueil = document.getElementById("accueil"); 
-  accueil.classList.add("active");
-  accueil.appendChild(createHiddenSpan());
 }
+
+if (statut != null && statut != "") { putActiveClass(statut); }
+else { putActiveClass("accueil"); }
 
 // JS pour les inputs de connexion
 const allInput = document.querySelectorAll("input.form-control");
