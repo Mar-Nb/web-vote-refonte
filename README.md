@@ -48,3 +48,7 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 10
 
 * Factorisation du JS de la navbar
+
+## Commit 11
+
+* Ajout de l'HTML pour la connexion des profs
