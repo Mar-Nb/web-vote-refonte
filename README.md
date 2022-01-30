@@ -15,7 +15,7 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 4
 
 * Modification de l'index
-* Classe Formulaire.php
+* Classe `Formulaire.php`
 
 ## Commit 5
 > Aucun test
@@ -52,3 +52,7 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 11
 
 * Ajout de l'HTML pour la connexion des profs
+
+## Commit 12
+* Suppression des fichiers de Composer du projet
+* Modification des ouvertures `PDO`

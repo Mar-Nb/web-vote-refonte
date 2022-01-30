@@ -1,8 +1,5 @@
 <?php
 session_start();
-require "vendor/autoload.php";
-
-use App\SQLiteConnection;
 
 // On empêche le changement de statut via l'URL
 if ($_SESSION["statut"] != $_GET["statut"]) {
@@ -11,7 +8,7 @@ if ($_SESSION["statut"] != $_GET["statut"]) {
   header("Location: index.php");
 }
 
-$pdo = (new SQLiteConnection())->connect();
+$pdo = new PDO("sqlite:db/phpsqlite.db");
 ?>
 
 <!DOCTYPE html>
@@ -80,14 +77,14 @@ $pdo = (new SQLiteConnection())->connect();
                 $sql = "SELECT name, class, id FROM users WHERE status = 'prof'";
                 $stmt = $pdo->prepare($sql);
                 $stmt->execute();
-                $profs = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $profs = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 // Récupération des (éventuelles) votes existants de l'utilisateur
                 $sql = "SELECT * FROM vote WHERE idEleve = ?";
                 $stmt = $pdo->prepare($sql);
-                $stmt->bindValue(1, $_SESSION["idUser"], \PDO::PARAM_INT); // L'ID est un INT
+                $stmt->bindValue(1, $_SESSION["idUser"], PDO::PARAM_INT); // L'ID est un INT
                 $stmt->execute();
-                $votes = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+                $votes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
                 foreach ($profs as $key => $prof) :
                   $vote = 0;
@@ -131,40 +128,33 @@ $pdo = (new SQLiteConnection())->connect();
 
           $sql = "SELECT COUNT(*) FROM vote WHERE idProf = ?";
           $stmt = $pdo->prepare($sql);
-          $stmt->bindValue(1, $_SESSION["idUser"], \PDO::PARAM_INT); // L'ID est un INT
+          $stmt->bindValue(1, $_SESSION["idUser"], PDO::PARAM_INT); // L'ID est un INT
           $stmt->execute();
           $nbVote = $stmt->fetchColumn();
 
           $sql2 = "SELECT value, COUNT(value) as nbValue FROM vote WHERE idProf = ? GROUP BY value";
           $stmt = $pdo->prepare($sql2);
-          $stmt->bindValue(1, $_SESSION["idUser"], \PDO::PARAM_INT);
+          $stmt->bindValue(1, $_SESSION["idUser"], PDO::PARAM_INT);
           $stmt->execute();
-          $lignes = $stmt->fetchAll(\PDO::FETCH_ASSOC);
+          $lignes = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
           foreach ($lignes as $key => $ligne) {
             switch ($ligne["value"]) {
               case 0:
-                $data["Non voté"] = $ligne["nbValue"];
-                break;
+                $data["Non voté"] = $ligne["nbValue"]; break;
               case 1:
-                $data["Très mécontent"] = $ligne["nbValue"];
-                break;
+                $data["Très mécontent"] = $ligne["nbValue"]; break;
               case 2:
-                $data["Mécontent"] = $ligne["nbValue"];
-                break;
+                $data["Mécontent"] = $ligne["nbValue"]; break;
               case 3:
-                $data["Moyen"] = $ligne["nbValue"];
-                break;
+                $data["Moyen"] = $ligne["nbValue"]; break;
               case 4:
-                $data["Satisfait"] = $ligne["nbValue"];
-                break;
+                $data["Satisfait"] = $ligne["nbValue"]; break;
               case 5:
-                $data["Très satisfait"] = $ligne["nbValue"];
-                break;
+                $data["Très satisfait"] = $ligne["nbValue"]; break;
 
               default:
-                print_r($data);
-                die();
+                print_r($data); die();
             }
           }
         ?>

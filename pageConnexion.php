@@ -67,8 +67,8 @@ switch ($_GET["statut"]) {
         <form action="actionConnexion.php?statut=<?= $_GET["statut"] ?>" method="POST">
           <fieldset>
             <legend>Connexion : <span class="fw-bold"><?= $statut ?></span></legend>
-            <div class="form-group">
-              <div class="form-floating my-3">
+            <div class="form-group my-5">
+              <div class="form-floating my-5">
                 <input type="text" class="form-control" id="pseudo" name="pseudo" placeholder="Un pseudo" required>
                 <label for="pseudo">Pseudo</label>
               </div>
@@ -78,7 +78,7 @@ switch ($_GET["statut"]) {
               </div>
             </div>
 
-            <div class="d-grid gap-2 col-6 mx-auto my-3">
+            <div class="d-grid gap-2 col-6 mx-auto my-5">
               <button class="btn btn-primary" type="submit">Connexion</button>
             </div>
           </fieldset>

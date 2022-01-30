@@ -23,26 +23,6 @@ function putActiveClass(id) {
 if (statut != null && statut != "") { putActiveClass(statut); }
 else { putActiveClass("accueil"); }
 
-// JS pour les inputs de connexion
-const allInput = document.querySelectorAll("input.form-control");
-
-allInput.forEach(function(input) {
-  input.addEventListener('focusout', function() {
-    let divErr = document.createElement("div");
-    divErr.classList.add("invalid-feedback");
-    divErr.textContent = "Vous devez remplir ce champ obligatoire.";
-
-    if (input.value == "") {
-      input.classList.add("is-invalid");
-      input.insertAdjacentElement("afterend", divErr);
-    } else if (input.value != "") {
-      input.classList.remove("is-invalid");
-      try { document.querySelectorAll(".invalid-feedback")?.remove(); }
-      catch (error) {}
-    }
-  });
-});
-
 // JS pour le toast de la page de vote
 let toastTrigger = document.getElementById('btnVote');
 let voteToast = document.getElementById('voteToast');

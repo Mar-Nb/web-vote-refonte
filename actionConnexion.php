@@ -1,12 +1,6 @@
 <?php
   session_start();
-  require "vendor/autoload.php";
-  use App\SQLiteConnection;
-
-  // echo "Connexion en cours : " . $_POST["pseudo"] . ", statut = " . $_GET["statut"] . "\n";
-  // echo "Mdp : " . $_POST["mdp"] . ", Hash : " . md5($_POST["mdp"]) . "\n";
-
-  $pdo = (new SQLiteConnection())->connect();
+  $pdo = new PDO("sqlite:db/phpsqlite.db");
 
   // Pour éviter les injections SQL
   $pseudo = htmlspecialchars(strip_tags($_POST["pseudo"]));
@@ -15,7 +9,7 @@
   $sql = "SELECT id, name, mdp FROM users WHERE name = ? and mdp = ? and status = ?";
   $stmt = $pdo->prepare($sql);
   $stmt->execute(array($pseudo, md5($mdp), $_GET["statut"]));
-  $row = $stmt->fetch(\PDO::FETCH_ASSOC);
+  $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if ($row) {
     echo "User [" . $_POST["pseudo"] . "] existe dans la base !";
