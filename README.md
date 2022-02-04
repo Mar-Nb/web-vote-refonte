@@ -56,3 +56,7 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 12
 * Suppression des fichiers de Composer du projet
 * Modification des ouvertures `PDO`
+
+## Commit 13
+
+* Ajout de FPDF
