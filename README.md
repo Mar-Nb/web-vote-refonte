@@ -60,3 +60,10 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 13
 
 * Ajout de FPDF
+
+## Commit 14
+
+* Ajout de la page Admin
+* Modifs légères pour la connexion et la page de vote
+* Ajout du logout
+* Ajout d'un fichier de conf pour les graphiques

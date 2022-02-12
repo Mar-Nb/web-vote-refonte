@@ -21,6 +21,7 @@ function putActiveClass(id) {
 }
 
 if (statut != null && statut != "") { putActiveClass(statut); }
+else if (window.location.href.toLowerCase().includes("admin")) { putActiveClass("admin"); }
 else { putActiveClass("accueil"); }
 
 // JS pour le toast de la page de vote

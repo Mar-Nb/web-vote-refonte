@@ -22,6 +22,7 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootswatch@5.1.3/dist/sandstone/bootstrap.min.css" integrity="sha256-zWAnZkKmT2MYxdCMp506rQtnA9oE2w0/K/WVU7V08zw=" crossorigin="anonymous">
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.0/dist/chart.min.js" integrity="sha256-Y26AMvaIfrZ1EQU49pf6H4QzVTrOI8m9wQYKkftBt4s=" crossorigin="anonymous"></script>
+  <script src="js/config.js"></script>
 
   <title>Votre page de vote</title>
 </head>
@@ -29,7 +30,7 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
 <body class="d-flex flex-column h-100">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/index.php">Web Vote</a>
+      <a class="navbar-brand" href="index.php">Web Vote</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -37,7 +38,7 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a id="accueil" class="nav-link" href="/index.php">Accueil</a>
+            <a id="accueil" class="nav-link" href="index.php">Accueil</a>
           </li>
           <li class="nav-item">
             <a id="eleve" class="nav-link" href="pageConnexion.php?statut=eleve">Élève</a>
@@ -49,6 +50,10 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
             <a id="admin" class="nav-link" href="pageConnexion.php?statut=admin">Administrateur</a>
           </li>
         </ul>
+
+        <form class="d-flex" action="logout.php">
+          <button class="btn btn-danger my-2 my-sm-0" type="submit">Déconnexion</button>
+      </form>
       </div>
     </div>
   </nav>
@@ -167,40 +172,9 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           <canvas id="graph-repartition" class="mx-auto" width="350" height="275"></canvas>
           <script>
             const ctx = document.getElementById("graph-repartition").getContext("2d");
-            const myChart = new Chart(ctx, {
-              type: "doughnut",
-              data: {
-                labels: ["Non voté", "Très mécontent", "Mécontent", "Moyen", "Satisfait", "Très satisfait"],
-                datasets: [{
-                  label: 'Nombre de votes',
-                  data: [<?= $data["Non voté"] ?>, <?= $data["Très mécontent"] ?>, <?= $data["Mécontent"] ?>, <?= $data["Moyen"] ?>, <?= $data["Satisfait"] ?>, <?= $data["Très satisfait"] ?>],
-                  backgroundColor: [
-                    'rgba(255, 99, 132, 0.2)',
-                    'rgba(54, 162, 235, 0.2)',
-                    'rgba(255, 206, 86, 0.2)',
-                    'rgba(75, 192, 192, 0.2)',
-                    'rgba(153, 102, 255, 0.2)',
-                    'rgba(255, 159, 64, 0.2)'
-                  ],
-                  borderColor: [
-                    'rgba(255, 99, 132, 1)',
-                    'rgba(54, 162, 235, 1)',
-                    'rgba(255, 206, 86, 1)',
-                    'rgba(75, 192, 192, 1)',
-                    'rgba(153, 102, 255, 1)',
-                    'rgba(255, 159, 64, 1)'
-                  ],
-                  borderWidth: 1,
-                }]
-              },
-              options: {
-                scales: {
-                  y: {
-                    beginAtZero: true
-                  }
-                }
-              }
-            });
+            confChart.type = "doughnut";
+            confChart.data.datasets[0].data = [<?= $data["Non voté"] ?>, <?= $data["Très mécontent"] ?>, <?= $data["Mécontent"] ?>, <?= $data["Moyen"] ?>, <?= $data["Satisfait"] ?>, <?= $data["Très satisfait"] ?>];
+            const myChart = new Chart(ctx, confChart);
           </script>
         <?php endif; ?>
       </div>
@@ -218,12 +192,14 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
       </div>
     </div>
 
-    <footer class="footer mt-auto py-3 border-top">
-      <p class="text-center text-muted">Refonte du projet <a href="https://github.com/Mar-Nb/web-vote">Web Vote</a></p>
-      <p class="text-center text-muted">&copy; <?= date("Y") ?> Web Vote</p>
-    </footer>
+  </div>
 
-    <script src="js/script.js"></script>
+  <footer class="footer mt-auto py-3 border-top">
+    <p class="text-center text-muted">Refonte du projet <a href="https://github.com/Mar-Nb/web-vote">Web Vote</a></p>
+    <p class="text-center text-muted">&copy; <?= date("Y") ?> Web Vote</p>
+  </footer>
+
+  <script src="js/script.js"></script>
 </body>
 
 </html>

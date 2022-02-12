@@ -37,7 +37,7 @@ switch ($_GET["statut"]) {
 <body class="d-flex flex-column h-100">
   <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/index.php">Web Vote</a>
+      <a class="navbar-brand" href="index.php">Web Vote</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -45,7 +45,7 @@ switch ($_GET["statut"]) {
       <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav me-auto">
           <li class="nav-item">
-            <a id="accueil" class="nav-link" href="/index.php">Accueil</a>
+            <a id="accueil" class="nav-link" href="index.php">Accueil</a>
           </li>
           <li class="nav-item">
             <a id="eleve" class="nav-link" href="pageConnexion.php?statut=eleve">Élève</a>
