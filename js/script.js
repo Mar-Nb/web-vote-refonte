@@ -7,6 +7,10 @@ const url = window.location.search;
 const queryStatut = new URLSearchParams(url);
 const statut = queryStatut.get("statut");
 
+/**
+ * Create a span element with a class of "visually-hidden" and a text content of "(current)"
+ * @returns a span element with a class of "visually-hidden" and text content of "(current)".
+ */
 function createHiddenSpan() {
   let span = document.createElement("span");
   span.classList.add("visually-hidden");
@@ -14,6 +18,10 @@ function createHiddenSpan() {
   return span;
 }
 
+/**
+ * Add the active class to the element with the specified id and add a hidden span to the element
+ * @param id - The id of the element to be activated.
+ */
 function putActiveClass(id) {
   let elem = document.getElementById(id);
   elem.classList.add("active");
@@ -42,6 +50,12 @@ if (toastTrigger) {
     makeRequest(dataPost);
   }
   
+
+  /**
+   * The function `makeRequest` creates an XMLHttpRequest object, call the function `toastContents()` when the request is complete.
+   * @param data - The data to be sent to the server.
+   * @returns The response from the server.
+   */
   function makeRequest(data) {
     ajax = new XMLHttpRequest();
     if (! ajax) { alert("Impossible de créer un objet XMLHTTP."); return false; }
@@ -52,6 +66,14 @@ if (toastTrigger) {
     ajax.send(data);
   };
 
+  /**
+   * When the AJAX request is complete, the function checks the status of the request. 
+   * * If the request was successful, the function removes the image of the previous vote and adds a
+   * green checkmark image. 
+   * * If the request was not successful, the function removes the image of the previous vote and adds
+   * a red cross image. 
+   * * The function then shows a toast message
+   */
   function toastContents() {
     if (ajax.readyState === XMLHttpRequest.DONE) {
       // En cas de votes successifs
@@ -73,7 +95,6 @@ if (toastTrigger) {
 
         let toast = new bootstrap.Toast(voteToast);
         toast.show();
-        // let response = JSON.parse(ajax.responseText);
       } else {
         voteToast.classList.add("bg-danger");
         img.alt = "Image vectorielle de croix d'invalidation, de couleur rouge, tiré du site FontAwesome.com";
@@ -89,3 +110,34 @@ if (toastTrigger) {
     }
   }
 }
+
+// Menu déroulant des profs, page Admin
+document.getElementById("select-prof").addEventListener("change", function() {
+  var ajax = new XMLHttpRequest();
+  var formData = new FormData();
+
+  formData.append("ajax", "graph");
+  formData.append("idProf", this.value);
+
+  ajax.open("POST", "reqAjax.php");
+  ajax.onload = function() {
+    res = JSON.parse(ajax.response);
+
+    // Les graph partagent la même conf, d'où les lignes suivantes
+    // Maj graph donut
+    myChartDonut.data.datasets[0].data = res.data;
+    myChartDonut.config.options.scales.x.display = false;
+    myChartDonut.config.type = "doughnut";
+    myChartDonut.update();
+
+    // Maj graph bar
+    myChartHist.data.datasets[0].data = res.data;
+    myChartHist.config.options.scales.x.display = true;
+    myChartHist.config.type = "bar";
+    myChartHist.update();
+  };
+
+  ajax.send(formData);
+});
+
+window.addEventListener("close", function(e) { e.preventDefault(); window.location.href = "logout.php"; this.close(); });

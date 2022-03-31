@@ -151,7 +151,7 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           }
           ?>
 
-          <select class="form-select" aria-label="Select pour les profs">
+          <select id="select-prof" class="form-select" aria-label="Select pour les profs">
             <?php
             foreach ($profs as $key => $prof) {
               echo "<option value='" . $prof["id"] . "'>" . $prof["name"] . " (" . $prof["class"] . ")</option>";
@@ -162,11 +162,11 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           <div class="col pt-3">
             <canvas id="graph-repartition-donut" class="mx-auto" width="350" height="275"></canvas>
 
-            <script>
-              const ctxDonut = document.getElementById("graph-repartition-donut").getContext("2d");
+            <script id="script-donut">
+              var ctxDonut = document.getElementById("graph-repartition-donut").getContext("2d");
               confChart.type = "doughnut";
               confChart.data.datasets[0].data = [<?= $data["Non voté"] ?>, <?= $data["Très mécontent"] ?>, <?= $data["Mécontent"] ?>, <?= $data["Moyen"] ?>, <?= $data["Satisfait"] ?>, <?= $data["Très satisfait"] ?>];
-              const myChartDonut = new Chart(ctxDonut, confChart);
+              var myChartDonut = new Chart(ctxDonut, confChart);
             </script>
 
             <input type="hidden" id="image-donut" value="">
@@ -179,17 +179,17 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           <div class="col pt-3">
             <canvas id="graph-repartition-hist" class="mx-auto" width="350" height="275"></canvas>
 
-            <script>
-              const ctxHist = document.getElementById("graph-repartition-hist").getContext("2d");
+            <script id="script-hist">
+              var ctxHist = document.getElementById("graph-repartition-hist").getContext("2d");
               confChart.type = "bar";
               confChart.data.datasets[0].data = [<?= $data["Non voté"] ?>, <?= $data["Très mécontent"] ?>, <?= $data["Mécontent"] ?>, <?= $data["Moyen"] ?>, <?= $data["Satisfait"] ?>, <?= $data["Très satisfait"] ?>];
-              const myChartHist = new Chart(ctxHist, confChart);
+              var myChartHist = new Chart(ctxHist, confChart);
             </script>
 
             <input type="hidden" id="image-hist" value="">
 
             <script>
-              document.getElementById("image-hist").value = myChartDonut.toBase64Image();
+              document.getElementById("image-hist").value = myChartHist.toBase64Image();
             </script>
           </div>
         </div>
