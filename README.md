@@ -67,3 +67,7 @@ Refonte du projet web-vote, ancien projet web de DUT.
 * Modifs légères pour la connexion et la page de vote
 * Ajout du logout
 * Ajout d'un fichier de conf pour les graphiques
+
+## Commit 15
+
+* Mise à jour dynamique des graphiques de la page Admin, en AJAX
