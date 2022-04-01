@@ -8,10 +8,9 @@
 *******************************************************************************/
 
 define('FPDF_VERSION','1.84');
-define('FPDF_FONTPATH', dirname(__FILE__).'/assets/font/')
+define('FPDF_FONTPATH', dirname(__FILE__).'/assets/font/');
 
-class FPDF
-{
+class FPDF {
 protected $page;               // current page number
 protected $n;                  // current object number
 protected $offsets;            // array of object offsets

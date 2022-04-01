@@ -71,3 +71,8 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 15
 
 * Mise à jour dynamique des graphiques de la page Admin, en AJAX
+
+## Commit 16
+
+* Export PDF et téléchargement du tableau de l'admin
+* Téléchargement des graphiques en PNG

@@ -66,11 +66,11 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           </div>
 
           <div class="col col-sm-2 py-2 py-sm-3 d-grid gap-2">
-            <button type="button" class="btn btn-dark">Export PDF</button>
+            <button type="button" id="export-pdf" class="btn btn-dark">Export PDF</button>
           </div>
         </div>
 
-        <table class="table table-dark table-striped">
+        <table id="info-prof" class="table table-dark table-striped">
           <thead>
             <th scope="col">#</th>
             <th scope="col">Moyenne</th>
@@ -106,7 +106,7 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           </div>
 
           <div class="col col-sm-2 py-2 py-sm-3 d-grid gap-2">
-            <button type="button" class="btn btn-dark">Export images</button>
+            <button type="button" id="export-images" class="btn btn-dark">Export images</button>
           </div>
         </div>
 

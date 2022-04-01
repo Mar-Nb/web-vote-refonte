@@ -141,3 +141,75 @@ document.getElementById("select-prof").addEventListener("change", function() {
 });
 
 window.addEventListener("close", function(e) { e.preventDefault(); window.location.href = "logout.php"; this.close(); });
+
+// Export PDF
+document.getElementById("export-pdf").addEventListener("click", function () {
+  let ajax = new XMLHttpRequest();
+  let formData = new FormData();
+  const data = [];
+
+  ajax.open("POST", "exportPDF.php");
+  ajax.responseType = "blob";
+
+  formData.append("ajax", "export");
+  
+  for (let row of document.getElementById("info-prof").getElementsByTagName("tbody")[0].rows) {
+    data.push(row.innerText.split("\t"));
+  }
+
+  formData.append("data", data);
+
+  // ajax.onload = function() { console.log(ajax.response); }
+
+  ajax.onload = function () {
+    var blob = this.response;
+    var filename = "";
+    var disposition = ajax.getResponseHeader('Content-Disposition');
+    if (disposition && disposition.indexOf('attachment') !== -1) {
+      var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+      var matches = filenameRegex.exec(disposition);
+      if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+    }
+
+    if (typeof window.navigator.msSaveBlob !== 'undefined') {
+      // IE workaround for "HTML7007: One or more blob URLs were revoked by closing the blob for which they were created. These URLs will no longer resolve as the data backing the URL has been freed."
+      window.navigator.msSaveBlob(blob, filename);
+    } else {
+      var URL = window.URL || window.webkitURL;
+      var downloadUrl = URL.createObjectURL(blob);
+
+      if (filename) {
+        // use HTML5 a[download] attribute to specify filename
+        var a = document.createElement("a");
+        // safari doesn't support this yet
+        if (typeof a.download === 'undefined') {
+          window.location.href = downloadUrl;
+        } else {
+          a.href = downloadUrl;
+          a.download = filename;
+          document.body.appendChild(a);
+          a.click();
+        }
+      } else {
+        window.location.href = downloadUrl;
+      }
+
+      setTimeout(function () { URL.revokeObjectURL(downloadUrl); }, 100); // cleanup
+    }
+  };
+
+  ajax.send(formData);
+});
+
+document.getElementById("export-images").addEventListener("click", function() {
+  document.getElementById("image-donut").value = myChartDonut.toBase64Image();
+  document.getElementById("image-hist").value = myChartHist.toBase64Image();
+
+  const images = ["image-donut", "image-hist"];
+  const link = document.createElement("a");
+  images.forEach(function(img) {
+    link.href = document.getElementById(img).value;
+    link.download = img + ".png";
+    link.click();
+  });
+});
