@@ -48,6 +48,7 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           </li>
         </ul>
 
+        <button class="btn btn-info my-2 mx-2 my-sm-2" data-bs-toggle="modal" data-bs-target="#modal-new">Créer utilisateur</button>
         <form class="d-flex" action="logout.php">
           <button class="btn btn-danger my-2 my-sm-0" type="submit">Déconnexion</button>
         </form>
@@ -56,6 +57,56 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
   </nav>
 
   <div class="container pb-5">
+
+    <div class="modal fade" id="modal-new" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Nouvel utilisateur</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-muted">Vous allez pouvoir créer un nouvel utilisateur : élève, utilisateur ou administrateur.</p>
+            <form id="form-user" method="post">
+              <div class="mb-3">
+                <label for="inputName" class="form-label">Nom</label>
+                <input type="text" class="form-control" id="inputName" name="nom" placeholder="Nom et prénom de l'utilisateur" required>
+              </div>
+
+              <div class="mb-3">
+                <label for="select-statut" class="form-label">Statut</label>
+                <select id="select-statut" name="statut" class="form-select" aria-label="Select du statut de l'utilisateur" required>
+                  <option class="text-muted" disabled selected>Choisissez un statut</option>
+                  <option value="eleve">Elève</option>
+                  <option value="prof">Professeur</option>
+                  <option value="admin">Administrateur</option>
+                </select>
+              </div>
+
+              <div id="divClass" class="mb-3 d-none">
+                <label for="inputClass" class="form-label">Classe</label>
+                <input type="text" class="form-control" id="inputClass" name="classe" placeholder="Classe du professeur">
+              </div>
+
+              <div class="mb-3">
+                <label for="inputMdp" class="form-label">Mot de passe</label>
+                <input type="password" spellcheck="false" class="form-control" id="inputMdp" name="mdp" placeholder="Mot de passe de l'utilisateur" required>
+                <div class="form-check mt-2">
+                  <input class="form-check-input" type="checkbox" value="" id="mdpCheck">
+                  <label class="form-check-label" for="mdpCheck">
+                    Afficher le mot de passe
+                  </label>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="new-user" class="btn btn-primary">Créer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <div class="row align-items-center ps-3 py-3">
       <div class="col">
         <h2 class="text-decoration-underline py-2 py-sm-5">Bienvenue, administrateur <span class="fw-bold"><?= $_SESSION["pseudo"] ?></span></h2>

@@ -213,3 +213,47 @@ document.getElementById("export-images").addEventListener("click", function() {
     link.click();
   });
 });
+
+// JS pour le modal
+let modalNew = new bootstrap.Modal(document.getElementById('modal-new'));
+
+document.getElementById('modal-new').addEventListener("hidden.bs.modal", function () {
+  document.getElementById("inputName").value = null;
+  document.getElementById("inputClass").value = null;
+  document.getElementById("select-statut").value = null;
+  document.getElementById("inputMdp").value = null;
+});
+
+document.getElementById("select-statut").addEventListener("change", function () {
+  if (this.value == "prof") {
+    document.getElementById("divClass").classList.remove("d-none");
+    document.getElementById("inputClass").required = true;
+  }
+  else {
+    document.getElementById("divClass").classList.add("d-none");
+    document.getElementById("inputClass").required = false;
+  }
+});
+
+document.getElementById("mdpCheck").addEventListener("change", function () {
+  if (this.checked) { document.getElementById("inputMdp").type = "text"; }
+  else { document.getElementById("inputMdp").type = "password"; }
+});
+
+document.getElementById("new-user").addEventListener("click", function () {
+  let ajax = new XMLHttpRequest();
+  let formData = new FormData(document.getElementById("form-user"));
+
+  ajax.open("POST", "reqAjax.php");
+  formData.append("ajax", "new-user");
+  ajax.onload = function () {
+    res = JSON.parse(ajax.response);
+
+    if (res.success) {
+      modalNew.hide();
+      alert("Nouvel utilisateur créé : " + res.nom + " " + res.statut + " " + res.classe);
+    } else { alert("Erreur lors de la création : " + res.error); }
+  }
+
+  ajax.send(formData);
+});
