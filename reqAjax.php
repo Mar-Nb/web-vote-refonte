@@ -69,8 +69,44 @@ if (isset($_POST["ajax"])) {
         $pdo->rollBack();
         echo json_encode(array("error" => $e->getMessage(), "success" => false, "nom" => $_POST["nom"], "mdp" => $_POST["mdp"], "statut" => $_POST["statut"], "classe" => $_POST["classe"]));
       }
+      
+      break;
+
+    case "verif-user":
+      $sql = "SELECT COUNT(name) FROM users WHERE name = ? GROUP BY name";
+      $stmt = $pdo->prepare($sql);
+      $stmt->bindValue(1, $_POST["name"]);
+      $stmt->execute();
+      $existe = $stmt->fetchColumn() != 0;
+
+      if ($existe) {
+        echo json_encode(array("userExiste" => true));
+      } else {
+        echo json_encode(array("userExiste" => false));
+      }
+
       break;
     
+    case "delete":
+      try {
+        $pdo->beginTransaction();
+        $sql = "DELETE FROM users WHERE name = ?";
+        $stmt = $pdo->prepare($sql);
+        $stmt->execute(array($_POST["user"]));
+  
+        if ($stmt->rowCount() != 0) {
+          $pdo->commit();
+          echo json_encode(array("success" => true));
+        } else {
+          throw new Exception("L'utilisateur n'a pas pu être supprimé.", 1);
+        }
+      } catch (Exception $e) {
+        $pdo->rollBack();
+        echo json_encode(array("error" => $e->getMessage()));
+      }
+
+      break;
+
     default:
       # code...
       break;

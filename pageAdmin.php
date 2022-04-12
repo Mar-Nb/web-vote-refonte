@@ -48,8 +48,11 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           </li>
         </ul>
 
-        <button class="btn btn-info my-2 mx-2 my-sm-2" data-bs-toggle="modal" data-bs-target="#modal-new">Créer utilisateur</button>
-        <form class="d-flex" action="logout.php">
+        <div class="btn-group my-2 my-sm-2 mx-2" role="group">
+          <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-new">Créer utilisateur</button>
+          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-del">Supprimer utilisateur</button>
+        </div>
+        <form action="logout.php">
           <button class="btn btn-danger my-2 my-sm-0" type="submit">Déconnexion</button>
         </form>
       </div>
@@ -58,6 +61,7 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
 
   <div class="container pb-5">
 
+    <!-- Modal de création d'un utilisateur -->
     <div class="modal fade" id="modal-new" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
@@ -102,6 +106,30 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
           </div>
           <div class="modal-footer">
             <button type="button" id="new-user" class="btn btn-primary">Créer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Fin du modal -->
+
+    <!-- Modal de suppression d'un utilisateur -->
+    <div class="modal fade" id="modal-del" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header bg-primary text-white">
+            <h5 class="modal-title">Supprimer un utilisateur</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p class="text-muted fst-italic">Vous ne pouvez pas supprimer d'utilisateur de niveau "Administrateur".</p>
+            <div class="mb-3">
+              <label for="supprName" class="form-label">Identifiant</label>
+              <input type="text" class="form-control" id="supprName" name="nom" placeholder="Identifiant de l'utilisateur" required>
+              <div class="invalid-feedback">Cet utilisateur n'existe pas.</div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" id="del-user" class="btn btn-danger" disabled>Supprimer</button>
           </div>
         </div>
       </div>

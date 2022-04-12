@@ -214,8 +214,8 @@ document.getElementById("export-images").addEventListener("click", function() {
   });
 });
 
-// JS pour le modal
-let modalNew = new bootstrap.Modal(document.getElementById('modal-new'));
+// JS pour le modal de création
+let modalNew = new bootstrap.Modal(document.getElementById("modal-new"));
 
 document.getElementById('modal-new').addEventListener("hidden.bs.modal", function () {
   document.getElementById("inputName").value = null;
@@ -253,6 +253,60 @@ document.getElementById("new-user").addEventListener("click", function () {
       modalNew.hide();
       alert("Nouvel utilisateur créé : " + res.nom + " " + res.statut + " " + res.classe);
     } else { alert("Erreur lors de la création : " + res.error); }
+  }
+
+  ajax.send(formData);
+});
+
+// JS pour le modal de suppression
+let modalDel = new bootstrap.Modal(document.getElementById("modal-del"));
+
+document.getElementById("supprName").addEventListener("focusin", function () {
+  document.getElementById("supprName").classList.remove("is-valid", "is-invalid");
+});
+
+document.getElementById("supprName").addEventListener("keyup", function () {
+  let ajax = new XMLHttpRequest();
+  let formData = new FormData();
+
+  ajax.open("POST", "reqAjax.php");
+  formData.append("ajax", "verif-user");
+  formData.append("name", this.value);
+
+  ajax.onload = function () {
+    res = JSON.parse(ajax.response);
+
+    if (res.userExiste) {
+      document.getElementById("del-user").disabled = false;
+      document.getElementById("supprName").classList.add("is-valid");
+    } else {
+      document.getElementById("del-user").disabled = true;
+      document.getElementById("supprName").classList.add("is-invalid");
+    }
+  };
+
+  ajax.send(formData);
+});
+
+document.getElementById("modal-del").addEventListener("hidden.bs.modal", function () {
+  document.getElementById("supprName").classList.remove("is-valid", "is-invalid");
+  document.getElementById("supprName").value = "";
+  document.getElementById("del-user").disabled = true;
+});
+
+document.getElementById("del-user").addEventListener("click", function () {
+  let ajax = new XMLHttpRequest();
+  let formData = new FormData();
+
+  ajax.open("POST", "reqAjax.php");
+  formData.append("ajax", "delete");
+  formData.append("user", document.getElementById("supprName").value);
+
+  ajax.onload = function () {
+    res = JSON.parse(ajax.response);
+
+    if (res.success) { alert("Supprimé avec succès"); }
+    else { alert("Problème de suppression : " + res.error); }
   }
 
   ajax.send(formData);
