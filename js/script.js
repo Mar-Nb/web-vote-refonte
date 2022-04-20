@@ -251,8 +251,9 @@ document.getElementById("new-user").addEventListener("click", function () {
 
     if (res.success) {
       modalNew.hide();
-      alert("Nouvel utilisateur créé : " + res.nom + " " + res.statut + " " + res.classe);
-    } else { alert("Erreur lors de la création : " + res.error); }
+      afficheToast("success", "insert");
+      // alert("Nouvel utilisateur créé : " + res.nom + " " + res.statut + " " + res.classe);
+    } else { afficheToast("error", "insert", res.error); }
   }
 
   ajax.send(formData);
@@ -305,9 +306,47 @@ document.getElementById("del-user").addEventListener("click", function () {
   ajax.onload = function () {
     res = JSON.parse(ajax.response);
 
-    if (res.success) { alert("Supprimé avec succès"); }
-    else { alert("Problème de suppression : " + res.error); }
+    if (res.success) { afficheToast("success", "delete"); }
+    else { afficheToast("error", "delete", res.error); }
+
+    modalDel.hide();
   }
 
   ajax.send(formData);
 });
+
+// On remet à zéro les classes utilisées pour le toast lorsqu'il disparait
+document.getElementById("alertToast").addEventListener("hidden.bs.toast", function() {
+  document.getElementById("header-txt").innerText = "";
+  document.getElementsByClassName("toast-body")[0].innerText = "";
+});
+
+let toastAdmin = new bootstrap.Toast(document.getElementById("alertToast"));
+
+/* Creating a new toast object. */
+function afficheToast(type, operation, err = "Error") {
+  switch (operation) {
+    case "insert":
+      document.getElementById("header-txt").innerText = "Nouvel utilisateur";
+      if (type == "success") {
+        document.getElementsByClassName("toast-body")[0].innerText = "Le nouvel utilisateur a bien été ajouté.";
+      } else {
+        document.getElementsByClassName("toast-body")[0].innerText = "Erreur de création : " + err;
+      }
+      break;
+  
+    case "delete":
+      document.getElementById("header-txt").innerText = "Suppression d'utilisateur";
+      if (type == "success") {
+        document.getElementsByClassName("toast-body")[0].innerText = "L'utilisateur a bien été supprimé.";
+      } else {
+        document.getElementsByClassName("toast-body")[0].innerText = "Erreur de suppression : " + err;
+      }
+      break;
+
+    default:
+      break;
+  }
+
+  toastAdmin.show();
+}

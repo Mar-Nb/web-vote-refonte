@@ -272,6 +272,17 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
             </script>
           </div>
         </div>
+
+        <div id="alertToast" class="toast" role="alert" aria-live="assertive" aria-atomic="true">
+          <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 11">
+            <div class="toast-header bg-primary text-white">
+              <strong id="header-txt" class="me-auto"></strong>
+              <small>A l'instant</small>
+              <button type="button" class="btn-close" data-bs-dismiss="toast" aria-label="Close"></button>
+            </div>
+            <div class="toast-body bg-secondary text-white"></div>          
+          </div>
+        </div>
       </div>
     </div>
   </div>
