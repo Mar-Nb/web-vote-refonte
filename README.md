@@ -76,3 +76,7 @@ Refonte du projet web-vote, ancien projet web de DUT.
 
 * Export PDF et téléchargement du tableau de l'admin
 * Téléchargement des graphiques en PNG
+
+## Commit 17
+
+* Ajout de toast pour la partie Admin
