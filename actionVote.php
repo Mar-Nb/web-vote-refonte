@@ -1,7 +1,7 @@
 <?php
 session_start();
 
-$pdo = new PDO("sqlite:db/phpsqlite");
+$pdo = new PDO("sqlite:db/phpsqlite.db");
 $data = "";
 $ok = true;
 
