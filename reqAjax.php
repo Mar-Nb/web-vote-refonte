@@ -42,34 +42,7 @@ if (isset($_POST["ajax"])) {
       break;
 
     case "new-user":
-      try {
-        $pdo->beginTransaction();
-
-        if ($_POST["statut"] == "admin") {
-          $sql = "INSERT INTO superusers (name, mdp) VALUES (?, ?)";
-        } else {
-          $sql = "INSERT INTO users (name, mdp, status, class) VALUES (?, ?, ?, ?)";
-        }
-
-        $stmt = $pdo->prepare($sql);
-        $stmt->bindValue(1, $_POST["nom"]);
-        $stmt->bindValue(2, md5($_POST["mdp"]));
-
-        if ($_POST["statut"] != "admin") {
-          $stmt->bindValue(3, $_POST["statut"]);
-          $stmt->bindValue(4, $_POST["statut"] == "prof" ? $_POST["classe"] : null);
-        }
-
-        $stmt->execute();
-
-        if ($stmt->rowCount() != 1) { throw new Exception("L'utilisateur n'a pas pu être inséré.", 1); }
-        $pdo->commit();
-        echo json_encode(array("success" => true, "nom" => $_POST["nom"], "mdp" => $_POST["mdp"], "statut" => $_POST["statut"], "classe" => $_POST["classe"]));  
-      } catch (Exception $e) {
-        $pdo->rollBack();
-        echo json_encode(array("error" => $e->getMessage(), "success" => false, "nom" => $_POST["nom"], "mdp" => $_POST["mdp"], "statut" => $_POST["statut"], "classe" => $_POST["classe"]));
-      }
-      
+      echo json_encode(array("error" => "Non disponible en démo"));
       break;
 
     case "verif-user":
@@ -88,23 +61,7 @@ if (isset($_POST["ajax"])) {
       break;
     
     case "delete":
-      try {
-        $pdo->beginTransaction();
-        $sql = "DELETE FROM users WHERE name = ?";
-        $stmt = $pdo->prepare($sql);
-        $stmt->execute(array($_POST["user"]));
-  
-        if ($stmt->rowCount() != 0) {
-          $pdo->commit();
-          echo json_encode(array("success" => true));
-        } else {
-          throw new Exception("L'utilisateur n'a pas pu être supprimé.", 1);
-        }
-      } catch (Exception $e) {
-        $pdo->rollBack();
-        echo json_encode(array("error" => $e->getMessage()));
-      }
-
+      echo json_encode(array("error" => "Non disponible en démo"));
       break;
 
     default:

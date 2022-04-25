@@ -49,8 +49,13 @@ $pdo = new PDO("sqlite:db/phpsqlite.db");
         </ul>
 
         <div class="btn-group my-2 my-sm-2 mx-2" role="group">
-          <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-new">Créer utilisateur</button>
-          <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-del">Supprimer utilisateur</button>
+          <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Indisponible en démo">
+            <button class="btn btn-info" data-bs-toggle="modal" data-bs-target="#modal-new" disabled>Créer utilisateur</button>
+          </span>
+
+          <span data-bs-toggle="tooltip" data-bs-placement="bottom" title="Indisponible en démo">
+            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#modal-del" disabled>Supprimer utilisateur</button>
+          </span>
         </div>
         <form action="logout.php">
           <button class="btn btn-danger my-2 my-sm-0" type="submit">Déconnexion</button>

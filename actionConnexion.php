@@ -19,7 +19,6 @@
   $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
   if ($row) {
-    echo "User [" . $_POST["pseudo"] . "] existe dans la base !";
     $_SESSION["idUser"] = $row["id"];
     $_SESSION["pseudo"] = $pseudo;
     $_SESSION["mdp"] = $mdp;
@@ -27,7 +26,7 @@
     // En cas de changement du $_GET["statut"]
     $_SESSION["statut"] = $_GET["statut"];
 
-    if ($_GET["statut"] == "admin"){ header("Location: pageAdmin.php"); }
+    if ($_GET["statut"] == "admin") { header("Location: pageAdmin.php"); }
     else { header("Location: pageVote.php?statut=" . $_SESSION["statut"]); }
   } else {
     session_destroy();

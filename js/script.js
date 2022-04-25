@@ -1,3 +1,9 @@
+// Activation des tooltips
+var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
+var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+  return new bootstrap.Tooltip(tooltipTriggerEl);
+});
+
 // JS de la navbar
 const navbarLink = document.querySelectorAll("nav a.nav-link");
 navbarLink.forEach(function(link) { link.classList.remove("active"); });
@@ -159,8 +165,6 @@ document.getElementById("export-pdf").addEventListener("click", function () {
 
   formData.append("data", data);
 
-  // ajax.onload = function() { console.log(ajax.response); }
-
   ajax.onload = function () {
     var blob = this.response;
     var filename = "";
@@ -249,11 +253,9 @@ document.getElementById("new-user").addEventListener("click", function () {
   ajax.onload = function () {
     res = JSON.parse(ajax.response);
 
-    if (res.success) {
-      modalNew.hide();
-      afficheToast("success", "insert");
-      // alert("Nouvel utilisateur créé : " + res.nom + " " + res.statut + " " + res.classe);
-    } else { afficheToast("error", "insert", res.error); }
+    modalNew.hide();
+    if (res.success) { afficheToast("success", "insert"); }
+    else { afficheToast("error", "insert", res.error); }
   }
 
   ajax.send(formData);

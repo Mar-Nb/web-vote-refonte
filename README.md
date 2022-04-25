@@ -80,3 +80,9 @@ Refonte du projet web-vote, ancien projet web de DUT.
 ## Commit 17
 
 * Ajout de toast dans la partie Admin
+
+## Commit 18
+
+* Suppression de certaines lignes commentées
+* Modification de chemins
+* Blocage de l'ajout et de la suppression d'utilisateur

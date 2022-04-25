@@ -15,7 +15,7 @@ switch ($_GET["statut"]) {
     break;
 
   default:
-    header("Location: /index.php");
+    header("Location: index.php");
     break;
 }
 ?>
